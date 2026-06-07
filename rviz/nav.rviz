@@ -6,7 +6,6 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /LocalPath1
       Splitter Ratio: 0.5
     Tree Height: 536
   - Class: rviz/Selection
@@ -119,7 +118,7 @@ Visualization Manager:
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.009999999776482582
-      Style: Flat Squares
+      Style: Points
       Topic: /scan
       Unreliable: false
       Use Fixed Frame: true
