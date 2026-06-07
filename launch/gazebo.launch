@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Start Gazebo with your world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find robot_description)/worlds/basic1.world"/>
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="false"/>
+        <arg name="headless" value="false"/>
+        <arg name="debug" value="false"/>
+    </include>
+                                
+    <!-- Spawn your robot -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find robot_description)/urdf/xbotversionnine.xacro'"/>
+
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-param robot_description -urdf -model mobile_bot -x 0 -y -1 -z 0.1"/>
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0" />
+    </node>
+
+</launch>

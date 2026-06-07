@@ -1,0 +1,47 @@
+DWAPlannerROS:
+  # Velocity Limits 
+  max_vel_x: 0.5
+  min_vel_x: -0.1  # Allows the robot to back up slightly if trapped
+  
+  max_vel_y: 0.0   # STRICTLY 0.0 for non-holonomic differential drive
+  min_vel_y: 0.0
+
+  # Translation velocity limits (magnitude of combinations of x and y)
+  max_vel_trans: 0.5
+  min_vel_trans: 0.1
+
+  # Rotation velocity limits
+  max_vel_theta: 1.5
+  min_vel_theta: 0.4
+
+  # Acceleration Limits
+  acc_lim_x: 2.5
+  acc_lim_y: 0.0
+  acc_lim_theta: 3.2
+
+  # Goal Tolerances
+  yaw_goal_tolerance: 0.1
+  xy_goal_tolerance: 0.15
+  latch_xy_goal_tolerance: false
+
+  # Forward Simulation Parameters (Dynamic Window Evaluation)
+  sim_time: 1.7       # Time to forward simulate trajectories in seconds
+  vx_samples: 10      # Number of samples to check in X direction
+  vy_samples: 1       # Diff drive only needs 1 sample for Y
+  vth_samples: 20     # Number of samples to check for rotation
+
+  # Trajectory Scoring Weights (Tuning how closely it follows your Dijkstra path)
+  path_distance_bias: 32.0   # Higher = stays closer to the global path line
+  goal_distance_bias: 24.0   # Higher = prioritizes reaching the goal point faster
+  occdist_scale: 0.01        # Higher = fears obstacles more
+  forward_point_distance: 0.322
+  stop_time_buffer: 0.2
+  scaling_speed: 0.25
+  max_scaling_factor: 0.2
+
+  # Oscillation Prevention
+  oscillation_reset_dist: 0.05
+
+  # Debugging
+  publish_traj_pc : true
+  publish_cost_grid_pc: true
