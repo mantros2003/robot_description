@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+
+<world name="planning_world">
+
+  <include>
+    <uri>model://ground_plane</uri>
+  </include>
+
+  <include>
+    <uri>model://sun</uri>
+  </include>
+
+  <!-- Outer walls -->
+
+  <model name="outer_left">
+    <static>true</static>
+    <pose>-3 0 0.5 0 0 0</pose>
+
+    <link name="wall">
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.1 6 1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 6 1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+
+  <model name="outer_right">
+    <static>true</static>
+    <pose>3 0 0.5 0 0 0</pose>
+
+    <link name="wall">
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.1 6 1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.1 6 1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+
+  <model name="outer_top">
+    <static>true</static>
+    <pose>0 3 0.5 0 0 0</pose>
+
+    <link name="wall">
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>6 0.1 1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>6 0.1 1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+
+  <model name="outer_bottom">
+    <static>true</static>
+    <pose>0 -3 0.5 0 0 0</pose>
+
+    <link name="wall">
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>6 0.1 1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>6 0.1 1</size>
+          </box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+  
+  
+  <!-- Inner walls -->
+  <model name="inner_left">
+    <static>true</static>
+    <pose>-1 0 0.5 0 0 0</pose>
+
+    <link name="wall">
+      <collision name="collision">
+        <geometry>
+          <box><size>0.1 2 1</size></box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box><size>0.1 2 1</size></box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+  
+  <model name="inner_right">
+    <static>true</static>
+    <pose>1 0 0.5 0 0 0</pose>
+
+    <link name="wall">
+      <collision name="collision">
+        <geometry>
+          <box><size>0.1 2 1</size></box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box><size>0.1 2 1</size></box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+  
+  <model name="inner_top">
+    <static>true</static>
+    <pose>0 1 0.5 0 0 0</pose>
+
+    <link name="wall">
+      <collision name="collision">
+        <geometry>
+          <box><size>2 0.1 1</size></box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box><size>2 0.1 1</size></box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+  
+  <model name="inner_bottom_left">
+    <static>true</static>
+    <pose>-0.7 -1 0.5 0 0 0</pose>
+
+    <link name="wall">
+      <collision name="collision">
+        <geometry>
+          <box><size>0.6 0.1 1</size></box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box><size>0.6 0.1 1</size></box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+
+  <model name="inner_bottom_right">
+    <static>true</static>
+    <pose>0.7 -1 0.5 0 0 0</pose>
+
+    <link name="wall">
+      <collision name="collision">
+        <geometry>
+          <box><size>0.6 0.1 1</size></box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box><size>0.6 0.1 1</size></box>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+  
+  <!-- Dynamic Obstacle -->
+  <model name="dynamic_box_obstacle">
+		<pose>2.0 0.0 0.5 0 0 0</pose>
+		<link name="obs_base_link">
+			<inertial>
+				<mass>5.0</mass>
+				<inertia>
+					<ixx>0.083</ixx><ixy>0</ixy><ixz>0</ixz>
+					<iyy>0.083</iyy><iyz>0</iyz><izz>0.083</izz>
+				</inertia>
+			</inertial>
+			<collision name="collision">
+				<geometry>
+					<box><size>0.6 0.4 0.3</size></box>
+				</geometry>
+			</collision>
+			<visual name="visual">
+				<geometry>
+					<box><size>0.6 0.4 0.3</size></box>
+				</geometry>
+				<material>
+					<ambient>0.0 0.0 1.0 1</ambient>
+					<diffuse>0.0 0.0 1.0 1</diffuse>
+				</material>
+			</visual>
+		</link>
+
+		<plugin name="object_controller" filename="libgazebo_ros_planar_move.so">
+			<commandTopic>obs_cmd_vel</commandTopic>
+			<odometryTopic>obs_odom</odometryTopic>
+			<odometryFrame>obs_odom</odometryFrame>
+			<odometryRate>20.0</odometryRate>
+			<robotBaseFrame>obs_base_link</robotBaseFrame>
+		</plugin>
+	</model>
+
+</world>
+
+</sdf>

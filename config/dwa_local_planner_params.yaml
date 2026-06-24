@@ -25,15 +25,15 @@ DWAPlannerROS:
   latch_xy_goal_tolerance: false
 
   # Forward Simulation Parameters (Dynamic Window Evaluation)
-  sim_time: 1.7       # Time to forward simulate trajectories in seconds
-  vx_samples: 10      # Number of samples to check in X direction
+  sim_time: 1.0       # Time to forward simulate trajectories in seconds
+  vx_samples: 20      # Number of samples to check in X direction
   vy_samples: 1       # Diff drive only needs 1 sample for Y
-  vth_samples: 20     # Number of samples to check for rotation
+  vth_samples: 40     # Number of samples to check for rotation
 
-  # Trajectory Scoring Weights (Tuning how closely it follows your Dijkstra path)
-  path_distance_bias: 32.0   # Higher = stays closer to the global path line
-  goal_distance_bias: 24.0   # Higher = prioritizes reaching the goal point faster
-  occdist_scale: 0.01        # Higher = fears obstacles more
+  # Trajectory Scoring Weights
+  path_distance_bias: 20.0   # Higher = stays closer to the global path line
+  goal_distance_bias: 15.0   # Higher = prioritizes reaching the goal point faster
+  occdist_scale: 0.3        # Higher = fears obstacles more
   forward_point_distance: 0.322
   stop_time_buffer: 0.2
   scaling_speed: 0.25
