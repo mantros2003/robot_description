@@ -1,0 +1,298 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+
+<world name="default">
+
+  <!-- ========================================================= -->
+  <!-- Environment -->
+  <!-- ========================================================= -->
+
+  <include>
+    <uri>model://ground_plane</uri>
+  </include>
+
+  <include>
+    <uri>model://sun</uri>
+  </include>
+
+
+  <!-- ========================================================= -->
+  <!-- Walls -->
+  <!-- ========================================================= -->
+
+
+  <!-- North -->
+  <model name="north_wall">
+    <static>true</static>
+    <pose>0 5 0.5 0 0 0</pose>
+
+    <link name="link">
+
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>10 0.2 1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>10 0.2 1</size>
+          </box>
+        </geometry>
+      </visual>
+
+    </link>
+
+  </model>
+
+
+
+  <!-- South -->
+  <model name="south_wall">
+
+    <static>true</static>
+
+    <pose>0 -5 0.5 0 0 0</pose>
+
+    <link name="link">
+
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>10 0.2 1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>10 0.2 1</size>
+          </box>
+        </geometry>
+      </visual>
+
+    </link>
+
+  </model>
+
+
+
+
+  <!-- East -->
+  <model name="east_wall">
+
+    <static>true</static>
+
+    <pose>5 0 0.5 0 0 0</pose>
+
+    <link name="link">
+
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.2 10 1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.2 10 1</size>
+          </box>
+        </geometry>
+      </visual>
+
+    </link>
+
+  </model>
+
+
+
+
+  <!-- West -->
+  <model name="west_wall">
+
+    <static>true</static>
+
+    <pose>-5 0 0.5 0 0 0</pose>
+
+    <link name="link">
+
+      <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.2 10 1</size>
+          </box>
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.2 10 1</size>
+          </box>
+        </geometry>
+      </visual>
+
+    </link>
+
+  </model>
+
+
+
+
+  <!-- ========================================================= -->
+  <!-- Dynamic obstacle 1 -->
+  <!-- ========================================================= -->
+
+  <model name="obstacle1">
+
+    <static>false</static>
+
+    <pose>-2 0 1.1 0 0 0</pose>
+
+    <link name="body">
+    
+      <kinematic>true</kinematic>
+        
+        <inertial>
+            <mass>1.0</mass>
+            <inertia>
+                <ixx>0.1058</ixx>
+                <iyy>0.1058</iyy>
+                <izz>0.0450</izz>
+                <ixy>0.0</ixy>
+                <ixz>0.0</ixz>
+                <iyz>0.0</iyz>
+            </inertia>
+        </inertial>
+
+      <collision name="collision">
+
+        <geometry>
+          <cylinder>
+
+            <radius>0.30</radius>
+
+            <length>1.0</length>
+
+          </cylinder>
+        </geometry>
+
+      </collision>
+
+
+      <visual name="visual">
+
+        <geometry>
+
+          <cylinder>
+
+            <radius>0.30</radius>
+
+            <length>1.0</length>
+
+          </cylinder>
+
+        </geometry>
+
+      </visual>
+
+
+    </link>
+
+  </model>
+
+
+
+  <!-- ========================================================= -->
+  <!-- Dynamic obstacle 2 -->
+  <!-- ========================================================= -->
+
+
+  <model name="obstacle2">
+
+    <static>false</static>
+
+    <pose>0 2 1.1 0 0 0</pose>
+
+
+    <link name="body">
+    
+      <kinematic>true</kinematic>
+        
+        <inertial>
+            <mass>1.0</mass>
+            <inertia>
+                <ixx>0.1058</ixx>
+                <iyy>0.1058</iyy>
+                <izz>0.0450</izz>
+                <ixy>0.0</ixy>
+                <ixz>0.0</ixz>
+                <iyz>0.0</iyz>
+            </inertia>
+        </inertial>
+
+
+      <collision name="collision">
+
+        <geometry>
+
+          <cylinder>
+
+            <radius>0.30</radius>
+
+            <length>1.0</length>
+
+          </cylinder>
+
+        </geometry>
+
+      </collision>
+
+
+
+      <visual name="visual">
+
+        <geometry>
+
+          <cylinder>
+
+            <radius>0.30</radius>
+
+            <length>1.0</length>
+
+          </cylinder>
+
+        </geometry>
+
+      </visual>
+
+
+    </link>
+
+  </model>
+
+
+
+
+  <!-- ========================================================= -->
+  <!-- Motion plugin -->
+  <!-- ========================================================= -->
+
+
+  <plugin
+
+      name="moving_obstacles"
+
+      filename="libmoving_obstacles.so"/>
+
+
+</world>
+
+</sdf>

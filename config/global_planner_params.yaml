@@ -1,8 +1,9 @@
 RRTXPlanner:
-  sampling_min_x: 1928
+  # sampling_min_x: 1928
+  sampling_min_x: 1900
   # for basic_map sampling_max_x: 2094
-  sampling_max_x: 2064
+  sampling_max_x: 2100
   # for basic_map sampling_min_y: 1922
-  sampling_min_y: 1937
+  sampling_min_y: 1900
   # for basic_mapsampling_max_y: 2019
-  sampling_max_y: 2063
+  sampling_max_y: 2100

@@ -2,7 +2,7 @@
 <launch>
     <!-- Start Gazebo with your world -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find robot_description)/worlds/slit_box.world"/>
+        <arg name="world_name" value="$(find robot_description)/worlds/enclosure_with_obstacles.world"/>
         <arg name="paused" value="false"/>
         <arg name="use_sim_time" value="true"/>
         <arg name="gui" value="true"/>
@@ -14,7 +14,7 @@
     <param name="robot_description" command="$(find xacro)/xacro '$(find robot_description)/urdf/xbotversionnine.xacro'"/>
 
     <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
-        args="-param robot_description -urdf -model mobile_bot -x 0 -y -2 -z 0.1"/>
+        args="-param robot_description -urdf -model mobile_bot -x 4 -y -4 -z 0.1"/>
 
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
         <param name="publish_frequency" type="double" value="50.0" />

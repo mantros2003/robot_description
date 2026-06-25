@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Launch the Pedsim Simulator with your custom scene -->
+    <node name="pedsim_simulator" pkg="pedsim_simulator" type="pedsim_simulator" output="screen">
+        <param name="scene_file" value="$(find robot_description)/scenarios/dyn_world.xml"/>
+        <param name="simulation_factor" value="1.0"/> <!-- Speed of simulation -->
+    </node>
+
+    <!-- Launch the Point Cloud / Laser Scan simulator -->
+    <!-- This node looks at the pedestrians and generates a simulated 2D LaserScan or PointCloud -->
+    <node name="pedsim_visualizer" pkg="pedsim_visualizer" type="pedsim_visualizer_node"/>
+    
+    <!-- There are specific pedsim sensor nodes depending on the fork you use, 
+         often called 'pedsim_point_clouds' or similar, which publish to /pedsim/point_cloud -->
+	<node pkg="pedsim_sensors" type="pedsim_obstacle_sensor" name="pedsim_obstacle_sensor" output="screen">
+    	<param name="sensor_frame" value="base_link"/> 
+	</node>
+</launch>
