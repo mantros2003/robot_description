@@ -14,7 +14,7 @@
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <param name="base_global_planner" value="custom_planner/RRTXPlanner" />
-        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+        <param name="base_local_planner" value="teb_local_planner/TEBPlannerROS" />
 
   
         <rosparam file="$(find robot_description)/config/costmap_common.yaml" command="load" ns="global_costmap" />
@@ -23,9 +23,8 @@
         <rosparam file="$(find robot_description)/config/global_costmap.yaml" command="load" />
         <rosparam file="$(find robot_description)/config/move_base_params.yaml" command="load" />
         <rosparam file="$(find robot_description)/config/global_planner_params.yaml" command="load" />
-
-
         <rosparam file="$(find robot_description)/config/dwa_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find robot_description)/config/teb_local_planner_params.yaml" command="load" />
     </node>
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_description)/rviz/nav.rviz" />

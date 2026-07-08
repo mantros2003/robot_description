@@ -1,0 +1,147 @@
+TebLocalPlannerROS:
+
+  # ======================================================================
+  # Miscellaneous
+  # ======================================================================
+  odom_topic: odom
+  # map_frame: odom          # default is "odom"; set to "map" only if your
+                             # global plan is published in the map frame
+
+  # ======================================================================
+  # Trajectory
+  # ======================================================================
+  teb_autosize: True
+  dt_ref: 0.3                       # desired temporal resolution of the trajectory
+  dt_hysteresis: 0.1                # hysteresis for automatic resizing (~10% of dt_ref)
+  max_samples: 500
+  global_plan_overwrite_orientation: True   # let TEB fix orientation of the RRTx path
+  allow_init_with_backwards_motion: False
+  max_global_plan_lookahead_dist: 3.0       # how far ahead TEB looks along the RRTx path
+  global_plan_prune_distance: 1.0
+  exact_arc_length: False
+  feasibility_check_no_poses: 5             # poses checked for collision before cmd_vel
+  publish_feedback: False
+
+  # --- RRTx path following -------------------------------------------------
+  # Via-points inject attractors along the global plan so the local trajectory
+  # actually tracks your RRTx route instead of cutting its own time-optimal line.
+  # Set sep to -1 to disable; raise weight_viapoint (below) to follow more tightly.
+  global_plan_viapoint_sep: 0.5             # attractor spacing along global plan [m]
+
+  # ======================================================================
+  # Robot (differential drive)
+  # ======================================================================
+  max_vel_x: 0.5
+  max_vel_x_backwards: 0.1           # magnitude only, must stay > 0
+  max_vel_y: 0.0                     # strictly 0.0 for differential drive
+  max_vel_theta: 1.5
+  acc_lim_x: 2.5
+  acc_lim_theta: 3.2
+  min_turning_radius: 0.0            # 0.0 = can turn in place (diff drive)
+
+  # Footprint: 0.4 m (x) x 0.3 m (y) rectangle, matching the costmap footprint.
+  footprint_model:
+    type: "polygon"
+    vertices: [[0.2, 0.15], [-0.2, 0.15], [-0.2, -0.15], [0.2, -0.15]]
+  # Cheaper alternative if the optimizer runs too slow (polygon is the costliest
+  # model). Two circles approximating the same body:
+  # footprint_model:
+  #   type: "two_circles"
+  #   front_offset: 0.15
+  #   front_radius: 0.16
+  #   rear_offset: 0.15
+  #   rear_radius: 0.16
+
+  # ======================================================================
+  # Goal Tolerance
+  # ======================================================================
+  xy_goal_tolerance: 0.15
+  yaw_goal_tolerance: 0.1
+  free_goal_vel: False
+  complete_global_plan: True
+
+  # ======================================================================
+  # Obstacles
+  # ======================================================================
+  min_obstacle_dist: 0.25           # clearance BEYOND the footprint edges.
+                                    # Lower it (e.g. 0.10) if the robot is too
+                                    # timid in tight spaces, since the polygon
+                                    # footprint already accounts for the body.
+  inflation_dist: 0.4               # must be > min_obstacle_dist to take effect
+  include_costmap_obstacles: True
+  costmap_obstacles_behind_robot_dist: 1.0
+  obstacle_poses_affected: 30
+
+  # --- Dynamic obstacles ---------------------------------------------------
+  # NOTE: include_dynamic_obstacles only propagates obstacles with a constant-
+  # velocity model. Costmap points have zero velocity, so this does NOTHING on
+  # its own. To get real moving-obstacle avoidance you must feed velocity-tagged
+  # obstacles, either via the ~/obstacles topic (costmap_converter/ObstacleArrayMsg)
+  # or by enabling the CostmapToDynamicObstacles plugin below.
+  include_dynamic_obstacles: True
+  dynamic_obstacle_inflation_dist: 0.6
+  legacy_obstacle_association: False
+  obstacle_association_force_inclusion_factor: 1.5
+  obstacle_association_cutoff_factor: 5.0   # (fixed: replaces the invalid
+                                            #  obstacle_association_tracks_dependence_rate)
+
+  # Costmap converter (leave plugin empty to use raw costmap points).
+  # For dynamic tracking, uncomment the plugin line:
+  costmap_converter_plugin: ""
+  # costmap_converter_plugin: "costmap_converter::CostmapToDynamicObstacles"
+  costmap_converter_spin_thread: True
+  costmap_converter_rate: 5
+
+  # ======================================================================
+  # Optimization
+  # ======================================================================
+  no_inner_iterations: 5
+  no_outer_iterations: 4
+  optimization_activate: True
+  optimization_verbose: False
+  penalty_epsilon: 0.1
+
+  weight_max_vel_x: 2.0
+  weight_max_vel_theta: 1.0
+  weight_acc_lim_x: 1.0
+  weight_acc_lim_theta: 1.0
+
+  # Kinematic constraints
+  weight_kinematics_nh: 1000.0              # high = enforce non-holonomic (no side slip)
+  weight_kinematics_forward_drive: 1.0      # raise toward 1000 to strongly prefer driving forward
+  weight_kinematics_turning_radius: 1.0     # inert for diff drive (min_turning_radius = 0)
+
+  # Path & obstacle weights
+  weight_optimaltime: 1.0                   # raise to 2-5 if the robot crawls below max_vel_x
+  weight_shortest_path: 0.0
+  weight_obstacle: 50.0                     # penalty for approaching static obstacles
+  weight_inflation: 0.2
+  weight_dynamic_obstacle: 50.0             # penalty for approaching moving obstacles
+  weight_dynamic_obstacle_inflation: 0.2
+  weight_viapoint: 1.0                      # raise to ~5-10 to hug the RRTx path more tightly
+  weight_adapt_factor: 2.0
+
+  # ======================================================================
+  # Homotopy Class Planner (parallel planning in distinct topologies)
+  # ======================================================================
+  # Enabled by default: more robust around obstacles (explores left/right
+  # alternatives) but heavier on CPU. Set False for single-trajectory
+  # optimization on constrained hardware.
+  enable_homotopy_class_planning: True
+  enable_multithreading: True
+  max_number_classes: 4
+  selection_cost_hysteresis: 1.0
+  selection_obst_cost_scale: 100.0
+  selection_alternative_time_cost: False
+  roadmap_graph_no_samples: 15
+  roadmap_graph_area_width: 5
+  h_signature_prescaler: 0.5
+  h_signature_threshold: 0.1
+  obstacle_heading_threshold: 0.45
+  visualize_hc_graph: False
+
+  # ======================================================================
+  # Recovery
+  # ======================================================================
+  shrink_horizon_backup: True
+  oscillation_recovery: True
