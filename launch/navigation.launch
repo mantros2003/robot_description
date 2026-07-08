@@ -14,7 +14,7 @@
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <param name="base_global_planner" value="custom_planner/RRTXPlanner" />
-        <param name="base_local_planner" value="teb_local_planner/TEBPlannerROS" />
+        <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
 
   
         <rosparam file="$(find robot_description)/config/costmap_common.yaml" command="load" ns="global_costmap" />
