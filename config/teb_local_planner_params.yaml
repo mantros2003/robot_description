@@ -32,7 +32,7 @@ TebLocalPlannerROS:
   # Robot (differential drive)
   # ======================================================================
   max_vel_x: 0.5
-  max_vel_x_backwards: 0.1           # magnitude only, must stay > 0
+  max_vel_x_backwards: 0.2           # magnitude only, must stay > 0
   max_vel_y: 0.0                     # strictly 0.0 for differential drive
   max_vel_theta: 1.5
   acc_lim_x: 2.5
