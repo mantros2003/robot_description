@@ -90,7 +90,7 @@ public:
         }
 
         update_connection_ = event::Events::ConnectWorldUpdateBegin(
-            std::bind(&RandomMovingObstacles::OnUpdate, this));
+            std::bind(&MovingObstacles::OnUpdate, this));
 	}
 
 
@@ -161,7 +161,7 @@ private:
 
 	physics::WorldPtr world_;
 	common::Time last_time_;
-	std::vector<physics::ModelPtr> obstacles_;
+	std::vector<ObstacleState> obstacles_;
 	event::ConnectionPtr update_connection_;
 
 
