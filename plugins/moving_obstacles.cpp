@@ -34,49 +34,54 @@ public:
             if (model_name.find("obstacle") != std::string::npos) {
                 ObstacleState obs;
                 obs.model = model;
-                
-                // Randomize start and target positions within the square
+
                 obs.start_pos = ignition::math::Vector3d(
                     ignition::math::Rand::DblUniform(min_bound, max_bound),
                     ignition::math::Rand::DblUniform(min_bound, max_bound),
-                    0.1 // Z-height (keep it slightly above ground)
+                    0.1
                 );
 
-				// Ensure the spawn is far enough from other obstacles
-				while (true) {
-					bool flag = true;
+                // Ensure start_pos is at least 0.15m away from all existing obstacles
+                bool valid_start = false;
+                while (!valid_start) {
+                    valid_start = true; // Assume it's valid until proven otherwise
+                    
+                    for (size_t i = 0; i < obstacles_.size(); i++) {
+                        // ERROR FIXED: Accessing the .start_pos of the struct
+                        if (obs.start_pos.Distance(obstacles_[i].start_pos) < 0.15) {
+                            valid_start = false;
+                            break; // No need to check the rest, break the FOR loop early
+                        }
+                    }
 
-					for (int i = 0; i < obstacles_.size(); i++) {
-						if (obs.start_pos.Distance(obstacles_[i].start_pos) < 0.3) break;
-						if (i == obstacles_.size() - 1 ) flag = false;
-					}
+                    // If it was invalid, generate a new coordinate and the WHILE loop will re-check
+                    if (!valid_start) {
+                        obs.start_pos = ignition::math::Vector3d(
+                            ignition::math::Rand::DblUniform(min_bound, max_bound),
+                            ignition::math::Rand::DblUniform(min_bound, max_bound),
+                            0.1
+                        );
+                    }
+                }
 
-					if (flag) {
-						obs.start_pos = ignition::math::Vector3d(
-							ignition::math::Rand::DblUniform(min_bound, max_bound),
-							ignition::math::Rand::DblUniform(min_bound, max_bound),
-							0.1
-						);
-					} else break;
-				}
-                
                 obs.target_pos = ignition::math::Vector3d(
                     ignition::math::Rand::DblUniform(min_bound, max_bound),
                     ignition::math::Rand::DblUniform(min_bound, max_bound),
                     0.1
                 );
 
-				// Ensure a minimum ditance trajectory
-				while (obs.start_pos.Distance(obs.target_pos) < 3.0) {
-					obs.target_pos = ignition::math::Vector3d(
-						ignition::math::Rand::DblUniform(min_bound, max_bound),
-						ignition::math::Rand::DblUniform(min_bound, max_bound),
-						0.1
-					);
-				}
+                // Ensure target is at least 3.0m away from its own start_pos
+                while (obs.start_pos.Distance(obs.target_pos) < 3.0) {
+                    obs.target_pos = ignition::math::Vector3d(
+                        ignition::math::Rand::DblUniform(min_bound, max_bound),
+                        ignition::math::Rand::DblUniform(min_bound, max_bound),
+                        0.1
+                    );
+                }
+                
 
-                // Randomize speed between 0.5 and 1.5 m/s
-                obs.speed = ignition::math::Rand::DblUniform(0.5, 1.5);
+                // Randomize speed between 0.2, 0.4
+                obs.speed = ignition::math::Rand::DblUniform(0.2, 0.4);
                 obs.moving_to_target = true;
 
                 // Teleport to initial start position immediately
