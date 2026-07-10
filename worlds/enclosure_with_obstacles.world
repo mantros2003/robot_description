@@ -177,7 +177,7 @@
         <geometry>
           <cylinder>
 
-            <radius>0.30</radius>
+            <radius>0.20</radius>
 
             <length>1.0</length>
 
@@ -193,7 +193,7 @@
 
           <cylinder>
 
-            <radius>0.30</radius>
+            <radius>0.20</radius>
 
             <length>1.0</length>
 
@@ -245,7 +245,7 @@
 
           <cylinder>
 
-            <radius>0.30</radius>
+            <radius>0.20</radius>
 
             <length>1.0</length>
 
@@ -263,7 +263,7 @@
 
           <cylinder>
 
-            <radius>0.30</radius>
+            <radius>0.20</radius>
 
             <length>1.0</length>
 
