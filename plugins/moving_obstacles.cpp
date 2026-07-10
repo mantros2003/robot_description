@@ -161,7 +161,7 @@ private:
 
 	physics::WorldPtr world_;
 	common::Time last_time_;
-	std::vector<physics::ModelPtr> obstacles;
+	std::vector<physics::ModelPtr> obstacles_;
 	event::ConnectionPtr update_connection_;
 
 
