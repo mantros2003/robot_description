@@ -283,7 +283,7 @@
   <!-- ========================================================= -->
 
 
-  <!--model name="obstacle3">
+  <model name="obstacle3">
 
     <static>false</static>
 
@@ -344,7 +344,7 @@
 
     </link>
 
-  </model-->
+  </model>
   
   
   <!-- ========================================================= -->
@@ -352,7 +352,7 @@
   <!-- ========================================================= -->
 
 
-  <!--model name="obstacle4">
+  <model name="obstacle4">
 
     <static>false</static>
 
@@ -413,7 +413,145 @@
 
     </link>
 
-  </model-->
+  </model>
+
+  
+  <!-- ========================================================= -->
+  <!-- Dynamic obstacle 5 -->
+  <!-- ========================================================= -->
+
+
+  <model name="obstacle5">
+
+    <static>false</static>
+
+    <pose>0 2 1.1 0 0 0</pose>
+
+
+    <link name="body">
+    
+      <kinematic>true</kinematic>
+        
+        <inertial>
+            <mass>1.0</mass>
+            <inertia>
+                <ixx>0.1058</ixx>
+                <iyy>0.1058</iyy>
+                <izz>0.0450</izz>
+                <ixy>0.0</ixy>
+                <ixz>0.0</ixz>
+                <iyz>0.0</iyz>
+            </inertia>
+        </inertial>
+
+
+      <collision name="collision">
+
+        <geometry>
+
+          <cylinder>
+
+            <radius>0.20</radius>
+
+            <length>1.0</length>
+
+          </cylinder>
+
+        </geometry>
+
+      </collision>
+
+
+
+      <visual name="visual">
+
+        <geometry>
+
+          <cylinder>
+
+            <radius>0.20</radius>
+
+            <length>1.0</length>
+
+          </cylinder>
+
+        </geometry>
+
+      </visual>
+
+
+    </link>
+
+  </model>
+
+
+  <!-- ========================================================= -->
+  <!-- Dynamic obstacle 6 -->
+  <!-- ========================================================= -->
+
+
+  <model name="obstacle6">
+
+    <static>false</static>
+
+    <pose>0 2 1.1 0 0 0</pose>
+
+
+    <link name="body">
+    
+      <kinematic>true</kinematic>
+        
+        <inertial>
+            <mass>1.0</mass>
+            <inertia>
+                <ixx>0.1058</ixx>
+                <iyy>0.1058</iyy>
+                <izz>0.0450</izz>
+                <ixy>0.0</ixy>
+                <ixz>0.0</ixz>
+                <iyz>0.0</iyz>
+            </inertia>
+        </inertial>
+
+
+      <collision name="collision">
+
+        <geometry>
+
+          <cylinder>
+
+            <radius>0.20</radius>
+
+            <length>1.0</length>
+
+          </cylinder>
+
+        </geometry>
+
+      </collision>
+
+
+
+      <visual name="visual">
+
+        <geometry>
+
+          <cylinder>
+
+            <radius>0.20</radius>
+
+            <length>1.0</length>
+
+          </cylinder>
+
+        </geometry>
+
+      </visual>
+
+
+    </link>
+
+  </model>
 
 
 
