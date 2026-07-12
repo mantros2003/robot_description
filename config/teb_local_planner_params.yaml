@@ -87,10 +87,10 @@ TebLocalPlannerROS:
 
   # Costmap converter (leave plugin empty to use raw costmap points).
   # For dynamic tracking, uncomment the plugin line:
-  costmap_converter_plugin: ""
+  # costmap_converter_plugin: ""
   # costmap_converter_plugin: "costmap_converter::CostmapToDynamicObstacles"
-  costmap_converter_spin_thread: True
-  costmap_converter_rate: 5
+  # costmap_converter_spin_thread: True
+  # costmap_converter_rate: 5
 
   # ======================================================================
   # Optimization

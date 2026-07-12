@@ -1,0 +1,16 @@
+TebLocalPlannerROS:
+  costmap_converter_plugin: "costmap_converter::CostmapToDynamicObstacles"
+  costmap_converter_spin_thread: True
+  costmap_converter_rate: 10.0
+
+  costmap_converter/CostmapToDynamicObstacle:
+    alpha_slow: 0.3
+    alpha_fast: 0.85
+    beta: 0.85
+    min_sep_between_slow_and_fast_filter: 80
+    min_occupancy_probability: 253
+    max_occupancy_probability: 255
+    morph_size: 1
+    dt: 0.1
+    dist_thresh: 60.0
+    opti_time_out: 0.25
