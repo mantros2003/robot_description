@@ -25,6 +25,7 @@
         <rosparam file="$(find robot_description)/config/global_planner_params.yaml" command="load" />
         <rosparam file="$(find robot_description)/config/dwa_local_planner_params.yaml" command="load" />
         <rosparam file="$(find robot_description)/config/teb_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find robot_description)/config/costmap_converter_params.yaml" command="load" />
     </node>
 
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find robot_description)/rviz/nav.rviz" />
