@@ -13,6 +13,7 @@
     </node>
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+		<!-- launch-prefix="gdb -batch -ex run -ex bt -ex 'info locals' \-\-args" -->
         <param name="base_global_planner" value="custom_planner/MJERRTXPlanner" />
         <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
 

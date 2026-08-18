@@ -17,3 +17,8 @@ MJERRTXPlanner:
   sampling_min_y: 1900
   # for basic_mapsampling_max_y: 2019
   sampling_max_y: 2100
+  theta_file: "/home/swapnil/catkin_ws/src/robot_description/misc/theta_rad.bin"
+  kappa_file: "/home/swapnil/catkin_ws/src/robot_description/misc/kappa.bin"
+  singular_file: "/home/swapnil/catkin_ws/src/robot_description/misc/singular.bin"
+  arclength_file: "/home/swapnil/catkin_ws/src/robot_description/misc/arclength.bin"
+  alpha_files: ["/home/swapnil/catkin_ws/src/robot_description/misc/alpha1.bin","/home/swapnil/catkin_ws/src/robot_description/misc/alpha2.bin","/home/swapnil/catkin_ws/src/robot_description/misc/alpha3.bin","/home/swapnil/catkin_ws/src/robot_description/misc/alpha4.bin"]
