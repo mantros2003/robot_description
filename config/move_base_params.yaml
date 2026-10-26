@@ -1,4 +1,4 @@
-planner_frequency: 5.0
+planner_frequency: 10.0
 planner_patience: 1.0
 
 controller_frequency: 10.0
